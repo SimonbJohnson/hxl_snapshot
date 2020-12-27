@@ -1,11 +1,30 @@
 {
 	"branding":{
 		"images":[
-			{"src":"assets/logo-centre-green.png","height":40},
-			{"src":"assets/logo-ocha-blue.png","height":30}
+			{
+				"src":"assets/logo-centre-green.png",
+				"height":40
+			},
+			{
+				"src":"assets/logo-ocha-blue.png",
+				"height":30
+			}
 		]
 	},
 	"tables":[
-
+		{
+			"src":"https://proxy.hxlstandard.org/data.json?dest=data_edit&filter01=select&select-query01-01=%23meta%2Bishrp%3DY&strip-headers=on&url=https%3A%2F%2Fraw.githubusercontent.com%2FOCHA-DAP%2Fhdx-scraper-covid-viz%2Fmaster%2Fout_daily.json",
+			"columns":[
+				{
+					"header":"Country Name",
+					"hxltag":"#country+name"
+				},
+				{
+					"header":"AV. 7-DAY CASES PER 100,000",
+					"hxltag":"#affected+infected+avg+per100000"
+				}
+			],
+			"include": [0,20]
+		}
 	]
 }
