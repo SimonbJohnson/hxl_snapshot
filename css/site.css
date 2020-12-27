@@ -1,0 +1,170 @@
+h1, h2, h3, h3, h4 {
+	font-family: 'Gotham-Bold', sans-serif;
+}
+
+h1 {
+	font-size:1.6rem;
+	margin-bottom:8px;
+	margin-top:4px;
+}
+
+h2 {
+	font-size:1rem;
+	text-transform: uppercase;
+	margin-bottom:8px;
+	margin-top:4px;
+	font-weight:600;
+}
+
+body {
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 10px;
+	margin: 10px 30px;
+	-webkit-print-color-adjust: exact;
+}
+
+.branding img {
+	padding-right:20px;
+	vertical-align:top;
+}
+
+.page-break{
+  page-break-after:always
+}
+
+/*
+
+
+
+.bar {
+	height:10px;
+	background-color:#1ebfb3;
+	display:inline-block;
+	float:right;
+	margin-top:5px;
+	-webkit-print-color-adjust:exact;
+}
+
+.greybar {
+	background-color:#cccccc;
+}
+
+@media print {
+	.bar {
+		background-color:#1ebfb3!important;
+	    -webkit-print-color-adjust:exact;
+	}
+
+	.greybar {
+		background-color:#cccccc!important;
+	}
+}
+
+.rightalign {
+	text-align:right;
+}
+
+p { 
+	margin-bottom:4px;
+}
+
+.variable {
+	color:#009688;
+	font-weight:600;
+}
+
+@media print {
+	.variable {
+		color:#009688! important;
+	}
+}
+
+table {
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 0.9rem;
+}
+
+@media print { bar { -webkit-print-color-adjust: exact; } }
+
+.countrycol {
+	width:15%;
+}
+
+.datacol {
+	width:11%;
+}
+
+.longdatacol {
+	width:13%;
+}
+
+.arrowcol {
+	width:5%;
+}
+
+.barcol {
+	width:5%;
+}
+
+.logos img {
+	margin-left: 20px;
+	margin-bottom: 0;
+	vertical-align: top;
+	height: auto;
+	float:right
+}
+
+span.index {
+	display: inline-block;
+	width: 15px;
+}
+
+@font-face {
+  font-family: 'Gotham-Bold';
+  src: url('../assets/fonts/Gotham-Bold.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.table thead tr td {
+	font-family: 'Gotham-Bold', sans-serif;
+	font-size: 0.8rem;
+	text-transform: uppercase;
+	vertical-align: bottom;
+}
+
+.table tbody tr td {
+	border-top: 1px solid #CCC;
+	line-height: 2.1;
+}
+
+.table tbody tr td.minpadding {
+	padding-left:0;
+}
+
+footer p {
+	font-size: 0.9rem;
+	color: #888;
+}
+
+td {
+	padding-top:4px!important;
+	padding-bottom:2px!important;
+}
+
+.pctchange {
+	width:30px;
+	display: inline-block;
+}
+
+.arrow {
+	margin-left:10px;
+}
+
+.norightpad{
+	padding-right:0px!important;
+}
+
+.noleftpad{
+	padding-left:0px!important;
+}*/
