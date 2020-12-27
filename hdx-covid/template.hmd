@@ -1,0 +1,15 @@
+{{ branding }}
+
+# HDX Covid-19 Data Explorer: On-Demand Snapshot, {{ day }} {{ month }} {{ year }} [{{ time }} UTC]
+
+## THE 25 COUNTRIES WITH A HUMANITARIAN RESPONSE PLAN BY NUMBER OF NEW COVID-19 CASES PER 100,000 PEOPLE
+
+{{ table_1 }}
+
+{{ page break }}
+
+{{ table_2 }}
+
+<div class="footer">
+This on-demand daily provides a set of key indicators related to the pandemic environment in the 25 countries with a Humanitarian Response Plan (HRP). Data is updated as it becomes available and managed by the Humanitarian Data Exchange (HDX) of OCHA’s Centre for Humanitarian Data. | Several criteria and indicative thresholds have been developed to assess the spread of the virus, including related to cases, deaths, and positive test rate. For instance, combined with comprehensive surveillance and testing, a positive test rate of less than 5% is one indicator that transmission may be under control. An average over 7-days represents a rolling figure based on the totals for the recent period divided by seven. | Vaccination Campaigns Delayed represents the percentage of vaccination campaigns that have been postponed or cancelled; Food Market Prices In Crisis represents the percentage of commodities in alert, stress, or crisis. | Sources: Cases per 100k, Cases, Deaths (World Health Organization); Positive Test Rate (Our World In Data); Vaccination Campaigns Delayed (Multiple Sources); Food Market Prices in Crisis (World Food Program); HRP Funding (UNOCHA-Financial Tracking Service). | To explore further, please visit https://data.humdata.org/visualization/covid19-humanitarian-operations/. For questions/feedback, contact centrehumdata@un.org.
+</div>
