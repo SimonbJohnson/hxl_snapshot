@@ -1,3 +1,6 @@
+/** load files **/
+
+
 function loadConfig(){
 	$.ajax({ 
 	    type: 'GET', 
@@ -92,6 +95,8 @@ function loadTemplate(config){
 	});
 }
 
+/** parse and render files **/
+
 function parseMarkdown(markdown){
 	let html = marked(markdown);
 	return html;
@@ -101,6 +106,7 @@ function customTags(html,config){
 	html = addBranding(html,config);
 	html = addDateTags(html);
 	html = addLayoutTags(html);
+	html = addTables(html,config);
 	return html;
 }
 
@@ -139,9 +145,82 @@ function addLayoutTags(html){
 	return html;
 }
 
+function addTables(html,config){
+	config.tables.forEach(function(table,i){
+		let tableHTML = createTable(table);
+		let tableTag = '{{ table_'+(i+1)+' }}';
+		html = html.replaceAll(tableTag,tableHTML);
+	});
+	return html;
+}
+
+function createTable(tableConfig){
+	let html = '<table class="table" width="{{ width }}%"><thead>{{ header }}</thead><tbody<{{ values }}</tbody></table>';
+
+	let headerHTML = '<tr>{{ headerValues }}</tr>';
+	let headerValues = '';
+
+	tableConfig.columns.forEach(function(column){
+		let align = 'left';
+		if(column.align=='right'){
+			align = 'right';
+		}
+
+		headerValues += '<td class="{{ align }}">{{ value }}</td>'.replace('{{ value }}',column.header).replace('{{ align }}',align);
+	});
+
+	headerHTML = headerHTML.replace('{{ headerValues }}',headerValues);
+	let valuesHTML = createTableValues(tableConfig);
+
+	html = html.replace('{{ header }}', headerHTML).replace('{{ values }}',valuesHTML);
+	html = html.replace('{{ width }}',tableConfig.width);
+	return html
+}
+
+function createTableValues(tableConfig){
+	let valuesHTML = '';
+	let columnPositions = [];
+	tableConfig.columns.forEach(function(column){
+		let found = false;
+		tableConfig.data[0].forEach(function(tag,i){
+			if(tag==column.hxltag){
+				found = true
+				columnPositions.push(i);
+			}
+		});
+		if(!found){
+			columnPositions.push(null);
+		}		
+	});
+
+	let start = tableConfig.include[0];
+	let end = tableConfig.include[1];
+
+	tableConfig.data.slice(start,end).forEach(function(row){
+
+		let rowHTML = '<tr>{{ values }}</tr>';
+		let values = '';
+
+
+
+		columnPositions.forEach(function(c,i){
+			let value = row[c]
+			let align = 'left';
+			console.log(tableConfig.columns[i]);
+			if(tableConfig.columns[i].align=='right'){
+				align = 'right';
+			}
+			values += '<td class="{{ align }}"">{{ value }}</td>'.replace('{{ value }}',value).replace('{{ align }}',align);
+		})
+		rowHTML = rowHTML.replace('{{ values }}',values);
+		valuesHTML += rowHTML;
+	});
+	return valuesHTML;
+}
+
 function render(response,config){
-	let html = parseMarkdown(response);
-	html = customTags(html,config);
+	let html = customTags(response,config);
+	 html = parseMarkdown(html);
 	$('#content').html(html);
 }
 

@@ -18,7 +18,6 @@ h2 {
 
 body {
 	font-family: 'Source Sans Pro', sans-serif;
-	font-size: 10px;
 	margin: 10px 30px;
 	-webkit-print-color-adjust: exact;
 }
@@ -29,7 +28,43 @@ body {
 }
 
 .page-break{
-  page-break-after:always
+  page-break-after:always;
+}
+
+.right {
+	text-align: right;
+}
+
+table {
+	margin-top:20px;
+	margin-bottom:20px;
+}
+
+.table thead tr td {
+	font-family: 'Gotham-Bold', sans-serif;
+	font-size: 0.8rem;
+	text-transform: uppercase;
+	vertical-align: bottom;
+}
+
+.table tbody tr td {
+	border-top: 1px solid #CCC;
+	line-height: 2.1;
+	font-size:1rem;
+}
+
+.table tbody tr td.minpadding {
+	padding-left:0;
+}
+
+.footer p {
+	font-size: 0.9rem;
+	color: #888;
+}
+
+td {
+	padding-top:4px!important;
+	padding-bottom:2px!important;
 }
 
 /*
