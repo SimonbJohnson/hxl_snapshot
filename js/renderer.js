@@ -5,16 +5,82 @@ function loadConfig(){
 	    dataType: 'json',
 	    success:function(response){
 	        console.log(response);
-	        compileCallsToLoad(response)
+	        loadData(response)
 	    }
 	});
 }
 
-function compileCallsToLoad(config){
-	loadTemplate(config);
+function compileURLs(config){
+	let urls = [];
+	config.tables.forEach(function(table){
+		if(urls.indexOf(table.src)==-1){
+			urls.push(table.src);
+		}
+	});
+	return urls
+}
+
+function loadSingleData(urls,config){
+	let url = urls.pop();
+	$.ajax({ 
+	    type: 'GET', 
+	    url: url, 
+	    dataType: 'json',
+	    success:function(response){
+	        let dataHXL = hxlProxyToJSON(response);
+	        config = addDataToTable(config,response,url);
+	        loadSingleData(urls,config);
+	        if(urls.length==0){
+	        	loadTemplate(config)
+	        }
+	    }
+	});
+}
+
+function hxlProxyToJSON(input){
+    var output = [];
+    var keys=[]
+    input.forEach(function(e,i){
+        if(i==0){
+            e.forEach(function(e2,i2){
+                var parts = e2.split('+');
+                var key = parts[0]
+                if(parts.length>1){
+                    var atts = parts.splice(1,parts.length);
+                    atts.sort();                    
+                    atts.forEach(function(att){
+                        key +='+'+att
+                    });
+                }
+                keys.push(key);
+            });
+        } else {
+            var row = {};
+            e.forEach(function(e2,i2){
+                row[keys[i2]] = e2;
+            });
+            output.push(row);
+        }
+    });
+    return output;
+}
+
+function addDataToTable(config,data,url){
+	config.tables.forEach(function(table){
+		if(table.src==url){
+			table.data = data;
+		}
+	});
+	return config
+}
+
+function loadData(config){
+	let urls = compileURLs(config);
+	config = loadSingleData(urls,config)
 }
 
 function loadTemplate(config){
+	console.log(config);
 	$.ajax({ 
 	    type: 'GET', 
 	    url: 'template.hmd', 
