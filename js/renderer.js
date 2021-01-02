@@ -155,17 +155,16 @@ function addTables(html,config){
 }
 
 function createTable(tableConfig){
-	let html = '<table class="table" width="{{ width }}%"><thead>{{ header }}</thead><tbody<{{ values }}</tbody></table>';
+	let html = '<table class="table" style="width: {{ width }}%"><thead>{{ header }}</thead><tbody<{{ values }}</tbody></table>';
 
 	let headerHTML = '<tr>{{ headerValues }}</tr>';
 	let headerValues = '';
 
-	tableConfig.columns.forEach(function(column){
+	tableConfig.columns.forEach(function(column,i){
 		let align = 'left';
 		if(column.align=='right'){
 			align = 'right';
 		}
-
 		headerValues += '<td class="{{ align }}">{{ value }}</td>'.replace('{{ value }}',column.header).replace('{{ align }}',align);
 	});
 
@@ -177,15 +176,55 @@ function createTable(tableConfig){
 	return html
 }
 
+function addBar(value,column,i){
+	let min = column.bar[1].min;
+	let max = column.bar[1].max;
+	let width = 50
+	let length = (value-min)/(max-min)*width;
+	let greenBarHTML = '<div class="bar bar_{{ i }}" style="width: {{ length }}px"></div>'.replace('{{ length }}',length).replace('{{ i }}',i);
+	let greyBarHTML = '<div class="bar bar_{{ i }} greybar" style="width: {{ length }}px"></div>'.replace('{{ length }}',(width-length)).replace('{{ i }}',i);
+	let barHTML = greyBarHTML + greenBarHTML;
+	return barHTML;
+}
+
 function createTableValues(tableConfig){
 	let valuesHTML = '';
 	let columnPositions = [];
-	tableConfig.columns.forEach(function(column){
+	tableConfig.columns.forEach(function(column,i){
 		let found = false;
-		tableConfig.data[0].forEach(function(tag,i){
+		tableConfig.data[0].forEach(function(tag,j){
 			if(tag==column.hxltag){
 				found = true
-				columnPositions.push(i);
+				columnPositions.push(j);
+				if(column.bar!=undefined && column.bar[0]){
+					if(column.bar[1] ==  undefined){
+						column.bar.push({});
+					}
+					if(column.bar[1].min == undefined){
+						tableConfig.data.forEach(function(row,k){
+							if(k==0){
+								column.bar[1].min = tableConfig.data[1][j]
+							} else {
+								let value =row[j]*1
+								if(value<column.bar[1].min){
+									column.bar[1].min = value;
+								}
+							}
+						});
+					}
+					if(column.bar[1].max == undefined){
+						tableConfig.data.forEach(function(row,k){
+							if(k==0){
+								column.bar[1].max = tableConfig.data[1][j]
+							} else {
+								let value = row[j]*1
+								if(value>column.bar[1].max){
+									column.bar[1].max = value;
+								}
+							}
+						});
+					}
+				}
 			}
 		});
 		if(!found){
@@ -206,11 +245,15 @@ function createTableValues(tableConfig){
 		columnPositions.forEach(function(c,i){
 			let value = row[c]
 			let align = 'left';
-			console.log(tableConfig.columns[i]);
-			if(tableConfig.columns[i].align=='right'){
+			let column = tableConfig.columns[i]
+			if(column.align=='right'){
 				align = 'right';
 			}
-			values += '<td class="{{ align }}"">{{ value }}</td>'.replace('{{ value }}',value).replace('{{ align }}',align);
+			let barHTML = '';
+			if(column.bar!=undefined && column.bar[0]){
+				barHTML = addBar(value,column,i);
+			}
+			values += '<td class="{{ align }}"">{{ value }}{{ bar }}</td>'.replace('{{ value }}',value).replace('{{ align }}',align).replace('{{ bar }}',barHTML);
 		})
 		rowHTML = rowHTML.replace('{{ values }}',values);
 		valuesHTML += rowHTML;
