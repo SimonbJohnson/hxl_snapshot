@@ -238,7 +238,43 @@ function setMinMax(tableConfig){
 		}
 	});
 	return tableConfig
-}	
+}
+
+function commaSeparateNumber(val){
+	while (/(\d+)(\d{3})/.test(val.toString())){
+	  val = val.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
+	}
+	return val;
+}
+
+function formatValue(value,format){
+	let formattedValue = value;
+	if(!isNaN(Number(formattedValue))){
+		formattedValue = Number(value);
+	}
+	if(format!=undefined){
+
+		/* numerical formatting */
+		if(format.roundsf != undefined){
+			formattedValue = parseFloat(formattedValue.toPrecision(format.roundsf));
+		}
+
+		/* string formatting */
+
+		if(format.commas){
+			formattedValue = commaSeparateNumber(formattedValue);
+		}
+
+		if(format.pre == undefined){
+			format.pre = "";
+		}
+		if(format.post == undefined){
+			format.post = "";
+		}
+		formattedValue = format.pre + formattedValue + format.post;
+	}
+	return formattedValue;
+}
 
 function createTableValues(tableConfig){
 	let valuesHTML = '';
@@ -253,8 +289,6 @@ function createTableValues(tableConfig){
 		let rowHTML = '<tr>{{ values }}</tr>';
 		let values = '';
 
-
-
 		columnPositions.forEach(function(c,i){
 			let value = row[c]
 			let align = 'left';
@@ -266,7 +300,8 @@ function createTableValues(tableConfig){
 			if(column.bar!=undefined && column.bar[0]){
 				barHTML = addBar(value,column,i);
 			}
-			values += '<td class="{{ align }}"">{{ value }}{{ bar }}</td>'.replace('{{ value }}',value).replace('{{ align }}',align).replace('{{ bar }}',barHTML);
+			let formattedValue = formatValue(value,column.format);
+			values += '<td class="{{ align }}"">{{ value }}{{ bar }}</td>'.replace('{{ value }}',formattedValue).replace('{{ align }}',align).replace('{{ bar }}',barHTML);
 		})
 		rowHTML = rowHTML.replace('{{ values }}',values);
 		valuesHTML += rowHTML;

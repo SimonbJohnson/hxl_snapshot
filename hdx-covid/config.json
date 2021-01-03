@@ -30,13 +30,14 @@
 					"header":"AV. 7-DAY CASES PERCENT CHANGE",
 					"hxltag":"#affected+infected+avg+per100000+pct+change",
 					"align":"right",
-					"format":{"pre":"","post":"%","commas":false}
+					"format":{"pre":"","post":"%","commas":false,"roundsf":3}
 				},
 				{
 					"header":"AV. 7-DAY CASES",
 					"hxltag":"#affected+infected+avg",
 					"align":"right",
-					"bar":[true]
+					"bar":[true],
+					"format":{"pre":"","post":"","commas":true,"roundsf":3}
 				}
 			],
 			"include": [1,20],
