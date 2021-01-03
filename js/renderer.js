@@ -187,50 +187,63 @@ function addBar(value,column,i){
 	return barHTML;
 }
 
-function createTableValues(tableConfig){
-	let valuesHTML = '';
-	let columnPositions = [];
+function getColumnPositions(tableConfig){
+	let columnPositions = []
 	tableConfig.columns.forEach(function(column,i){
 		let found = false;
+
 		tableConfig.data[0].forEach(function(tag,j){
 			if(tag==column.hxltag){
 				found = true
 				columnPositions.push(j);
-				if(column.bar!=undefined && column.bar[0]){
-					if(column.bar[1] ==  undefined){
-						column.bar.push({});
-					}
-					if(column.bar[1].min == undefined){
-						tableConfig.data.forEach(function(row,k){
-							if(k==0){
-								column.bar[1].min = tableConfig.data[1][j]
-							} else {
-								let value =row[j]*1
-								if(value<column.bar[1].min){
-									column.bar[1].min = value;
-								}
-							}
-						});
-					}
-					if(column.bar[1].max == undefined){
-						tableConfig.data.forEach(function(row,k){
-							if(k==0){
-								column.bar[1].max = tableConfig.data[1][j]
-							} else {
-								let value = row[j]*1
-								if(value>column.bar[1].max){
-									column.bar[1].max = value;
-								}
-							}
-						});
-					}
-				}
 			}
 		});
 		if(!found){
 			columnPositions.push(null);
-		}		
+		}
 	});
+	return columnPositions;
+}
+
+function setMinMax(tableConfig){
+	tableConfig.columns.forEach(function(column,j){
+		if(column.bar!=undefined && column.bar[0]){
+			if(column.bar[1] ==  undefined){
+				column.bar.push({});
+			}
+			if(column.bar[1].min == undefined){
+				tableConfig.data.forEach(function(row,k){
+					if(k==0){
+						column.bar[1].min = tableConfig.data[1][j]
+					} else {
+						let value =row[j]*1
+						if(value<column.bar[1].min){
+							column.bar[1].min = value;
+						}
+					}
+				});
+			}
+			if(column.bar[1].max == undefined){
+				tableConfig.data.forEach(function(row,k){
+					if(k==0){
+						column.bar[1].max = tableConfig.data[1][j]
+					} else {
+						let value = row[j]*1
+						if(value>column.bar[1].max){
+							column.bar[1].max = value;
+						}
+					}
+				});
+			}
+		}
+	});
+	return tableConfig
+}	
+
+function createTableValues(tableConfig){
+	let valuesHTML = '';
+	let columnPositions = getColumnPositions(tableConfig);
+	tableConfig = setMinMax(tableConfig);
 
 	let start = tableConfig.include[0];
 	let end = tableConfig.include[1];
