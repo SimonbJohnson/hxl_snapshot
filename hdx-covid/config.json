@@ -25,7 +25,14 @@
 					"hxltag":"#affected+infected+avg+per100000",
 					"align":"right",
 					"bar":[true,{"min":0,"max":100}]
-				},{
+				},
+				{
+					"header":"AV. 7-DAY CASES PERCENT CHANGE",
+					"hxltag":"#affected+infected+avg+per100000+pct+change",
+					"align":"right",
+					"format":{"pre":"","post":"%","commas":false}
+				},
+				{
 					"header":"AV. 7-DAY CASES",
 					"hxltag":"#affected+infected+avg",
 					"align":"right",
@@ -33,7 +40,7 @@
 				}
 			],
 			"include": [1,20],
-			"width":50
+			"width":70
 		},
 		{
 			"src":"https://proxy.hxlstandard.org/data.json?dest=data_edit&filter01=select&select-query01-01=%23meta%2Bishrp%3DY&filter02=sort&sort-tags02=%23affected%2Binfected%2Bavg%2Bper100000&sort-reverse02=on&filter03=clean&clean-num-tags03=%23affected%2Binfected%2Bavg%2Bper100000&clean-number-format03=0.1f&strip-headers=on&url=https%3A%2F%2Fraw.githubusercontent.com%2FOCHA-DAP%2Fhdx-scraper-covid-viz%2Fmaster%2Fout_daily.json",
@@ -52,8 +59,8 @@
 					"align":"right"
 				}
 			],
-			"include": [21,25],
-			"width":50
+			"include": [20,26],
+			"width":70
 		}
 	]
 }
