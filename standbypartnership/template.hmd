@@ -1,0 +1,7 @@
+{{ branding }}
+
+# Standby Partnership Response Dashboard: On-Demand Snapshot, {{ day }} {{ month }} {{ year }} [{{ time }} UTC]
+
+## Deployment Counts by sector in 2020
+
+{{ table_1 }}
