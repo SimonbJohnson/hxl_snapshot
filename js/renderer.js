@@ -7,7 +7,6 @@ function loadConfig(){
 	    url: 'config.json', 
 	    dataType: 'json',
 	    success:function(response){
-	        console.log(response);
 	        loadData(response)
 	    }
 	});
@@ -30,7 +29,6 @@ function loadSingleData(urls,config){
 	    url: url, 
 	    dataType: 'json',
 	    success:function(response){
-	        let dataHXL = hxlProxyToJSON(response);
 	        config = addDataToTable(config,response,url);
 	        loadSingleData(urls,config);
 	        if(urls.length==0){
@@ -38,34 +36,6 @@ function loadSingleData(urls,config){
 	        }
 	    }
 	});
-}
-
-function hxlProxyToJSON(input){
-    var output = [];
-    var keys=[]
-    input.forEach(function(e,i){
-        if(i==0){
-            e.forEach(function(e2,i2){
-                var parts = e2.split('+');
-                var key = parts[0]
-                if(parts.length>1){
-                    var atts = parts.splice(1,parts.length);
-                    atts.sort();                    
-                    atts.forEach(function(att){
-                        key +='+'+att
-                    });
-                }
-                keys.push(key);
-            });
-        } else {
-            var row = {};
-            e.forEach(function(e2,i2){
-                row[keys[i2]] = e2;
-            });
-            output.push(row);
-        }
-    });
-    return output;
 }
 
 function addDataToTable(config,data,url){
@@ -83,13 +53,11 @@ function loadData(config){
 }
 
 function loadTemplate(config){
-	console.log(config);
 	$.ajax({ 
 	    type: 'GET', 
 	    url: 'template.hmd', 
 	    dataType: 'text',
 	    success:function(response){
-	        console.log(response);
 	        render(response,config);
 	    }
 	});
@@ -155,6 +123,9 @@ function addTables(html,config){
 }
 
 function createTable(tableConfig){
+
+	let columnPositions = getColumnPositions(tableConfig);
+
 	let html = '<table class="table" style="width: {{ width }}%"><thead>{{ header }}</thead><tbody<{{ values }}</tbody></table>';
 
 	let headerHTML = '<tr>{{ headerValues }}</tr>';
@@ -165,11 +136,15 @@ function createTable(tableConfig){
 		if(column.align=='right'){
 			align = 'right';
 		}
-		headerValues += '<td class="{{ align }}">{{ value }}</td>'.replace('{{ value }}',column.header).replace('{{ align }}',align);
+		console.log(columnPositions);
+		console.log(columnPositions[i]);
+		columnPositions[i].forEach(function(c){
+			headerValues += '<td class="{{ align }}">{{ value }}</td>'.replace('{{ value }}',column.header).replace('{{ align }}',align);
+		});
 	});
 
 	headerHTML = headerHTML.replace('{{ headerValues }}',headerValues);
-	let valuesHTML = createTableValues(tableConfig);
+	let valuesHTML = createTableValues(tableConfig,columnPositions);
 
 	html = html.replace('{{ header }}', headerHTML).replace('{{ values }}',valuesHTML);
 	html = html.replace('{{ width }}',tableConfig.width);
@@ -187,26 +162,43 @@ function addBar(value,column,i){
 	return barHTML;
 }
 
+function addArrow(value,column,i){
+	let min = column.arrow[1].min;
+	let max = column.arrow[1].max;
+	let rotate = d['#affected+avg+change+infected+pct+per100000']/10*-45;
+	if(rotate<-45){
+		rotate = -45
+	}
+	if(rotate>45){
+		rotate = 45
+	}
+	$('#arrow_'+i).css({"transform": "rotate("+rotate+"deg)"});
+	return arrowHTML;
+}
+
 function getColumnPositions(tableConfig){
 	let columnPositions = []
 	tableConfig.columns.forEach(function(column,i){
 		let found = false;
-
+		let columnList = [];
 		tableConfig.data[0].forEach(function(tag,j){
 			if(tag==column.hxltag){
 				found = true
-				columnPositions.push(j);
+				columnList.push(j);
 			}
 		});
 		if(!found){
 			columnPositions.push(null);
+		} else {
+			columnPositions.push(columnList);
 		}
 	});
 	return columnPositions;
 }
 
-function setMinMax(tableConfig){
+function setMinMax(tableConfig,columnPositions){
 	tableConfig.columns.forEach(function(column,j){
+		let columnsPositionSub = columnPositions[j];
 		if(column.bar!=undefined && column.bar[0]){
 			if(column.bar[1] ==  undefined){
 				column.bar.push({});
@@ -214,24 +206,29 @@ function setMinMax(tableConfig){
 			if(column.bar[1].min == undefined){
 				tableConfig.data.forEach(function(row,k){
 					if(k==0){
-						column.bar[1].min = tableConfig.data[1][j]
+						column.bar[1].min = tableConfig.data[1][columnsPositionSub[0]]
 					} else {
-						let value =row[j]*1
-						if(value<column.bar[1].min){
-							column.bar[1].min = value;
-						}
+						columnsPositionSub.forEach(function(colPos){
+							let value =row[colPos]*1
+							if(value<column.bar[1].min){
+								column.bar[1].min = value;
+							}							
+						});
+
 					}
 				});
 			}
 			if(column.bar[1].max == undefined){
 				tableConfig.data.forEach(function(row,k){
 					if(k==0){
-						column.bar[1].max = tableConfig.data[1][j]
+						column.bar[1].max = tableConfig.data[1][columnsPositionSub[0]]
 					} else {
-						let value = row[j]*1
-						if(value>column.bar[1].max){
-							column.bar[1].max = value;
-						}
+						columnsPositionSub.forEach(function(colPos){
+							let value = row[colPos]*1
+							if(value>column.bar[1].max){
+								column.bar[1].max = value;
+							}
+						});
 					}
 				});
 			}
@@ -276,32 +273,40 @@ function formatValue(value,format){
 	return formattedValue;
 }
 
-function createTableValues(tableConfig){
+function createTableValues(tableConfig,columnPositions){
 	let valuesHTML = '';
-	let columnPositions = getColumnPositions(tableConfig);
-	tableConfig = setMinMax(tableConfig);
 
-	let start = tableConfig.include[0];
-	let end = tableConfig.include[1];
+	console.log(columnPositions);
 
-	tableConfig.data.slice(start,end).forEach(function(row){
+	tableConfig = setMinMax(tableConfig,columnPositions);
+	let tableData = tableConfig.data.slice(1);
+	if(tableConfig.include!=undefined){
+		let start = tableConfig.include[0];
+		let end = tableConfig.include[1];
+		tableData =	tableConfig.data.slice(start,end)
+	}
+
+
+	tableData.forEach(function(row){
 
 		let rowHTML = '<tr>{{ values }}</tr>';
 		let values = '';
 
-		columnPositions.forEach(function(c,i){
-			let value = row[c]
-			let align = 'left';
-			let column = tableConfig.columns[i]
-			if(column.align=='right'){
-				align = 'right';
-			}
-			let barHTML = '';
-			if(column.bar!=undefined && column.bar[0]){
-				barHTML = addBar(value,column,i);
-			}
-			let formattedValue = formatValue(value,column.format);
-			values += '<td class="{{ align }}"">{{ value }}{{ bar }}</td>'.replace('{{ value }}',formattedValue).replace('{{ align }}',align).replace('{{ bar }}',barHTML);
+		columnPositions.forEach(function(columnPositionsSub,i){
+			columnPositionsSub.forEach(function(c,j){
+				let value = row[c]
+				let align = 'left';
+				let column = tableConfig.columns[i]
+				if(column.align=='right'){
+					align = 'right';
+				}
+				let barHTML = '';
+				if(column.bar!=undefined && column.bar[0]){
+					barHTML = addBar(value,column,j);
+				}
+				let formattedValue = formatValue(value,column.format);
+				values += '<td class="{{ align }}"">{{ value }}{{ bar }}</td>'.replace('{{ value }}',formattedValue).replace('{{ align }}',align).replace('{{ bar }}',barHTML);
+			});
 		})
 		rowHTML = rowHTML.replace('{{ values }}',values);
 		valuesHTML += rowHTML;
@@ -311,8 +316,9 @@ function createTableValues(tableConfig){
 
 function render(response,config){
 	let html = customTags(response,config);
-	 html = parseMarkdown(html);
+	html = parseMarkdown(html);
 	$('#content').html(html);
+	console.log(config);
 }
 
 loadConfig();
