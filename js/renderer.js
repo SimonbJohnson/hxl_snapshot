@@ -53,7 +53,6 @@ function reorderAttributes(data){
 			data[1][i] = newTag;
 		}
 	});
-	console.log(data);
 	return data;
 }
 
@@ -155,8 +154,6 @@ function createTable(tableConfig){
 		if(column.align=='right'){
 			align = 'right';
 		}
-		console.log(columnPositions);
-		console.log(columnPositions[i]);
 		columnPositions[i].forEach(function(c){
 			let header = '';
 			if(column.header==undefined){
@@ -184,12 +181,8 @@ function addBar(value,column,i){
 	let min = column.bar[1].min;
 	let max = column.bar[1].max;
 	value = value*1;
-	console.log(min);
-	console.log(max);
-	console.log(value);
 	let width = 50
 	let length = (value-min)/(max-min)*width;
-	console.log(length);
 	let greenBarHTML = '<div class="bar bar_{{ i }}" style="width: {{ length }}px"></div>'.replace('{{ length }}',length).replace('{{ i }}',i);
 	let greyBarHTML = '<div class="bar bar_{{ i }} greybar" style="width: {{ length }}px"></div>'.replace('{{ length }}',(width-length)).replace('{{ i }}',i);
 	let barHTML = greyBarHTML + greenBarHTML;
@@ -199,14 +192,19 @@ function addBar(value,column,i){
 function addArrow(value,column,i){
 	let min = column.arrow[1].min;
 	let max = column.arrow[1].max;
-	let rotate = d['#affected+avg+change+infected+pct+per100000']/10*-45;
+	let newValue = value-min;
+	let range = max-min
+	console.log(value);
+	console.log(newValue);
+	let rotate = newValue/range*-90+45;
 	if(rotate<-45){
 		rotate = -45
 	}
 	if(rotate>45){
 		rotate = 45
 	}
-	$('#arrow_'+i).css({"transform": "rotate("+rotate+"deg)"});
+	console.log(rotate);
+	let arrowHTML = ('<img class="arrow arrow_'+i+'" class="arrow" src="../images/arrow.svg" style="transform: rotate({{ rotate }}deg)">').replace("{{ rotate }}",rotate);
 	return arrowHTML;
 }
 
@@ -233,7 +231,49 @@ function getColumnPositions(tableConfig){
 function setMinMax(tableConfig,columnPositions){
 	tableConfig.columns.forEach(function(column,j){
 		let columnsPositionSub = columnPositions[j];
+		tableConfig.data.forEach(function(row,k){
+			if(k<2){
+				column.min = tableConfig.data[2][columnsPositionSub[0]]
+				column.max = tableConfig.data[2][columnsPositionSub[0]]
+			} else {
+				columnsPositionSub.forEach(function(colPos){
+					let value =row[colPos]*1
+					if(value<column.min){
+						column.min = value;
+					}
+					if(value>column.max){
+						column.max = value;
+					}								
+				});
+			}
+		});
+
 		if(column.bar!=undefined && column.bar[0]){
+			if(column.bar[1] ==  undefined){
+				column.bar.push({});
+			}
+			if(column.bar[1].min == undefined){
+				column.bar[1].min = column.min
+			}
+			if(column.bar[1].max == undefined){
+				column.bar[1].max = column.max
+			}
+		}
+
+		if(column.arrow!=undefined && column.arrow[0]){
+			if(column.arrow[1] ==  undefined){
+				column.arrow.push({});
+			}
+			if(column.arrow[1].min == undefined){
+				column.arrow[1].min = column.min
+			}
+			if(column.arrow[1].max == undefined){
+				column.arrow[1].max = column.max
+			}
+		}
+
+
+		/*if(column.bar!=undefined && column.bar[0]){
 			if(column.bar[1] ==  undefined){
 				column.bar.push({});
 			}
@@ -266,7 +306,7 @@ function setMinMax(tableConfig,columnPositions){
 					}
 				});
 			}
-		}
+		}*/
 	});
 	return tableConfig
 }
@@ -310,8 +350,6 @@ function formatValue(value,format){
 function createTableValues(tableConfig,columnPositions){
 	let valuesHTML = '';
 
-	console.log(columnPositions);
-
 	tableConfig = setMinMax(tableConfig,columnPositions);
 	let tableData = tableConfig.data.slice(2);
 	if(tableConfig.include!=undefined){
@@ -338,12 +376,16 @@ function createTableValues(tableConfig,columnPositions){
 				if(column.bar!=undefined && column.bar[0]){
 					barHTML = addBar(value,column,j);
 				}
+				let arrowHTML = '';
+				if(column.arrow!=undefined && column.arrow[0]){
+					arrowHTML = addArrow(value,column,j);
+				}
 				let colspan = 1;
 				if(column.colspan!=undefined){
 					colspan = column.colspan
 				}
 				let formattedValue = formatValue(value,column.format);
-				values += '<td class="{{ align }}" colspan={{ colspan }}>{{ value }}{{ bar }}</td>'.replace('{{ value }}',formattedValue).replace('{{ align }}',align).replace('{{ bar }}',barHTML).replace('{{ colspan }}',colspan);
+				values += '<td class="{{ align }}" colspan={{ colspan }}>{{ value }}{{ arrow }}{{ bar }}</td>'.replace('{{ value }}',formattedValue).replace('{{ align }}',align).replace('{{ bar }}',barHTML).replace('{{ colspan }}',colspan).replace('{{ arrow }}',arrowHTML);
 			});
 		})
 		rowHTML = rowHTML.replace('{{ values }}',values);

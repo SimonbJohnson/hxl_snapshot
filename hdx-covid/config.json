@@ -31,7 +31,8 @@
 					"header":"AV. 7-DAY CASES PERCENT CHANGE",
 					"hxltag":"#affected+avg+change+infected+pct+per100000",
 					"align":"right",
-					"format":{"pre":"","post":"%","commas":false,"roundsf":3}
+					"format":{"pre":"","post":"%","commas":false,"roundsf":3},
+					"arrow":[true,{"min":-10,"max":10}]
 				},
 				{
 					"header":"AV. 7-DAY CASES",
@@ -61,7 +62,8 @@
 					"header":"AV. 7-DAY CASES PERCENT CHANGE",
 					"hxltag":"#affected+avg+change+infected+pct+per100000",
 					"align":"right",
-					"format":{"pre":"","post":"%","commas":false,"roundsf":3}
+					"format":{"pre":"","post":"%","commas":false,"roundsf":3},
+					"arrow":[true,{"min":-10,"max":10}]
 				},
 				{
 					"header":"AV. 7-DAY CASES",
