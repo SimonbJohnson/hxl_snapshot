@@ -29,6 +29,7 @@ function loadSingleData(urls,config){
 	    url: url, 
 	    dataType: 'json',
 	    success:function(response){
+	    	response = reorderAttributes(response);
 	        config = addDataToTable(config,response,url);
 	        loadSingleData(urls,config);
 	        if(urls.length==0){
@@ -36,6 +37,24 @@ function loadSingleData(urls,config){
 	        }
 	    }
 	});
+}
+
+function reorderAttributes(data){
+	data[1].forEach(function(d,i){
+		let parts = d.split('+');
+		let newTag = parts.shift();
+		parts = parts.sort(function(a, b){
+    		if(a < b) { return -1; }
+   			if(a > b) { return 1; }
+    		return 0;
+		});
+		if(parts.length>0){
+			newTag = newTag + '+' +parts.join('+');
+			data[1][i] = newTag;
+		}
+	});
+	console.log(data);
+	return data;
 }
 
 function addDataToTable(config,data,url){
@@ -139,7 +158,17 @@ function createTable(tableConfig){
 		console.log(columnPositions);
 		console.log(columnPositions[i]);
 		columnPositions[i].forEach(function(c){
-			headerValues += '<td class="{{ align }}">{{ value }}</td>'.replace('{{ value }}',column.header).replace('{{ align }}',align);
+			let header = '';
+			if(column.header==undefined){
+				header = tableConfig.data[0][c];
+			} else {
+				header = column.header;
+			}
+			let colspan = 1;
+			if(column.colspan!=undefined){
+				colspan = column.colspan
+			}
+			headerValues += '<td class="{{ align }}" colspan={{ colspan }}>{{ value }}</td>'.replace('{{ value }}',header).replace('{{ align }}',align).replace('{{ colspan }}',colspan);
 		});
 	});
 
@@ -154,8 +183,13 @@ function createTable(tableConfig){
 function addBar(value,column,i){
 	let min = column.bar[1].min;
 	let max = column.bar[1].max;
+	value = value*1;
+	console.log(min);
+	console.log(max);
+	console.log(value);
 	let width = 50
 	let length = (value-min)/(max-min)*width;
+	console.log(length);
 	let greenBarHTML = '<div class="bar bar_{{ i }}" style="width: {{ length }}px"></div>'.replace('{{ length }}',length).replace('{{ i }}',i);
 	let greyBarHTML = '<div class="bar bar_{{ i }} greybar" style="width: {{ length }}px"></div>'.replace('{{ length }}',(width-length)).replace('{{ i }}',i);
 	let barHTML = greyBarHTML + greenBarHTML;
@@ -181,7 +215,7 @@ function getColumnPositions(tableConfig){
 	tableConfig.columns.forEach(function(column,i){
 		let found = false;
 		let columnList = [];
-		tableConfig.data[0].forEach(function(tag,j){
+		tableConfig.data[1].forEach(function(tag,j){
 			if(tag==column.hxltag){
 				found = true
 				columnList.push(j);
@@ -205,8 +239,8 @@ function setMinMax(tableConfig,columnPositions){
 			}
 			if(column.bar[1].min == undefined){
 				tableConfig.data.forEach(function(row,k){
-					if(k==0){
-						column.bar[1].min = tableConfig.data[1][columnsPositionSub[0]]
+					if(k<2){
+						column.bar[1].min = tableConfig.data[2][columnsPositionSub[0]]
 					} else {
 						columnsPositionSub.forEach(function(colPos){
 							let value =row[colPos]*1
@@ -220,8 +254,8 @@ function setMinMax(tableConfig,columnPositions){
 			}
 			if(column.bar[1].max == undefined){
 				tableConfig.data.forEach(function(row,k){
-					if(k==0){
-						column.bar[1].max = tableConfig.data[1][columnsPositionSub[0]]
+					if(k<2){
+						column.bar[1].max = tableConfig.data[2][columnsPositionSub[0]]
 					} else {
 						columnsPositionSub.forEach(function(colPos){
 							let value = row[colPos]*1
@@ -279,11 +313,11 @@ function createTableValues(tableConfig,columnPositions){
 	console.log(columnPositions);
 
 	tableConfig = setMinMax(tableConfig,columnPositions);
-	let tableData = tableConfig.data.slice(1);
+	let tableData = tableConfig.data.slice(2);
 	if(tableConfig.include!=undefined){
 		let start = tableConfig.include[0];
 		let end = tableConfig.include[1];
-		tableData =	tableConfig.data.slice(start,end)
+		tableData =	tableData.slice(start,end)
 	}
 
 
@@ -304,8 +338,12 @@ function createTableValues(tableConfig,columnPositions){
 				if(column.bar!=undefined && column.bar[0]){
 					barHTML = addBar(value,column,j);
 				}
+				let colspan = 1;
+				if(column.colspan!=undefined){
+					colspan = column.colspan
+				}
 				let formattedValue = formatValue(value,column.format);
-				values += '<td class="{{ align }}"">{{ value }}{{ bar }}</td>'.replace('{{ value }}',formattedValue).replace('{{ align }}',align).replace('{{ bar }}',barHTML);
+				values += '<td class="{{ align }}" colspan={{ colspan }}>{{ value }}{{ bar }}</td>'.replace('{{ value }}',formattedValue).replace('{{ align }}',align).replace('{{ bar }}',barHTML).replace('{{ colspan }}',colspan);
 			});
 		})
 		rowHTML = rowHTML.replace('{{ values }}',values);
