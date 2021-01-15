@@ -190,7 +190,7 @@ function addBar(value,column,i){
 	if(value<min){
 		value = min;
 	}
-	if(value<max){
+	if(value>max){
 		value = max;
 	}
 	value = value*1;
