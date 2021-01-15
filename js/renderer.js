@@ -147,7 +147,7 @@ function addTables(html,config){
 function createTable(tableConfig){
 	let columnPositions = getColumnPositions(tableConfig);
 
-	let html = '<table class="table" style="width: {{ width }}%"><thead>{{ header }}</thead><tbody<{{ values }}</tbody></table>';
+	let html = '<table class="table" style="width: {{ width }}%"><thead>{{ header }}</thead><tbody>{{ values }}</tbody></table>';
 
 	let headerHTML = '<tr>{{ headerValues }}</tr>';
 	let headerValues = '';
