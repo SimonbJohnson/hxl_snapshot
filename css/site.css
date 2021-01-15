@@ -70,13 +70,18 @@ td {
 	padding-bottom:2px!important;
 }
 
+@media print {
+	* {
+		background: transparent;
+	}
+}
+
 .bar {
 	height:10px;
 	background-color:#1ebfb3;
 	display:inline-block;
 	float:right;
 	margin-top:5px;
-	-webkit-print-color-adjust:exact;
 	margin-left:20px;
 }
 
@@ -88,6 +93,16 @@ td {
 .arrow {
 	margin-left:10px;
 	height:15px;
+}
+
+@media print {
+	.bar {
+	    -webkit-print-color-adjust:exact;
+	}
+
+	.greybar {
+		background-color:#cccccc!important;
+	}
 }
 
 

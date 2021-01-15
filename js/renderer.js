@@ -7,7 +7,11 @@ function loadConfig(){
 	    url: 'config.json', 
 	    dataType: 'json',
 	    success:function(response){
+	    	console.log(response);
 	        loadData(response)
+	    },
+	    error:function(){
+	    	console.log('Error in config.json - Run through json validator')
 	    }
 	});
 }
@@ -180,12 +184,19 @@ function createTable(tableConfig){
 function addBar(value,column,i){
 	let min = column.bar[1].min;
 	let max = column.bar[1].max;
+	let color = '#1ebfb3';
+	if(column.bar[1].color!=undefined){
+		color = column.bar[1].color;
+	}
 	value = value*1;
 	let width = 50
 	let length = (value-min)/(max-min)*width;
-	let greenBarHTML = '<div class="bar bar_{{ i }}" style="width: {{ length }}px"></div>'.replace('{{ length }}',length).replace('{{ i }}',i);
+	let greenBarHTML = '<div class="bar bar_{{ i }}" style="width: {{ length }}px; background-color:{{ color }}!important;"></div>'.replace('{{ length }}',length).replace('{{ i }}',i).replace('{{ color }}',color);
 	let greyBarHTML = '<div class="bar bar_{{ i }} greybar" style="width: {{ length }}px"></div>'.replace('{{ length }}',(width-length)).replace('{{ i }}',i);
 	let barHTML = greyBarHTML + greenBarHTML;
+	//if(column.bar[1].color!=undefined){
+	//	document.getElementsByTagName('style')[0].innerHTML='@media print {.bar {background-color:{{ color }};}}'.replace('{{ color }}',column.bar[1].color);
+	//}
 	return barHTML;
 }
 
@@ -194,8 +205,6 @@ function addArrow(value,column,i){
 	let max = column.arrow[1].max;
 	let newValue = value-min;
 	let range = max-min
-	console.log(value);
-	console.log(newValue);
 	let rotate = newValue/range*-90+45;
 	if(rotate<-45){
 		rotate = -45
@@ -203,7 +212,7 @@ function addArrow(value,column,i){
 	if(rotate>45){
 		rotate = 45
 	}
-	console.log(rotate);
+
 	let arrowHTML = ('<img class="arrow arrow_'+i+'" class="arrow" src="../images/arrow.svg" style="transform: rotate({{ rotate }}deg)">').replace("{{ rotate }}",rotate);
 	return arrowHTML;
 }
