@@ -187,6 +187,12 @@ function addBar(value,column,i){
 	if(column.bar[1].color!=undefined){
 		color = column.bar[1].color;
 	}
+	if(value<min){
+		value = min;
+	}
+	if(value<max){
+		value = max;
+	}
 	value = value*1;
 	let width = 50
 	let length = (value-min)/(max-min)*width;
