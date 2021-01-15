@@ -1,0 +1,23 @@
+{{ branding }}
+
+# IFRC Active Appeals and DREFs summary
+
+A live snapsot from the IFRC GO API taken at {{ day }} {{ month }} {{ year }} [{{ time }} UTC]
+
+## Summary of Appeals by Region
+
+{{ table_1 }}
+
+## Top 5 largest Active Appeals
+
+{{ table_2 }}
+
+{{ page break }}
+
+## Latest 5 Appeals
+
+{{ table_3 }}
+
+## Active Appeals by Disaster Type
+
+{{ table_4 }}

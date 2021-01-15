@@ -1,0 +1,176 @@
+{
+	"branding":{
+		"images":[
+			{
+				"src":"assets/british-red-cross-logo.png",
+				"height":80
+			}
+		]
+	},
+	"tables":[
+		{
+			"src":"https://proxy.hxlstandard.org/data.json?dest=data_edit&filter01=cut&filter-label01=Cut+columns+without+HXL+tags&cut-skip-untagged01=on&filter02=select&filter-label02=Filter+for+just+appeals&select-query02-01=%23meta%2Bappeal%2Btype+%3D+Emergency+Appeal&filter03=count&count-tags03=%23region%2Bname&count-type03-01=count&count-header03-01=Count+of+appeals&count-column03-01=%23meta%2Bcount&count-type03-02=sum&count-pattern03-02=%23value%2Brequested&count-header03-02=Total+funding+requested&count-column03-02=%23value%2Brequested&count-type03-03=sum&count-pattern03-03=%23value%2Bfunded&count-header03-03=Total+funding+recieved&count-column03-03=%23value%2Bfunded&count-type03-04=sum&count-pattern03-04=%23beneficiaries%2Bnum&count-header03-04=Beneficiaries&count-column03-04=%23beneficiaries%2Bnum&filter04=add&filter-label04=Calculated+percent+funded&add-tag04=%23value%2Bfundeded%2Bpct&add-value04=%7B%7B++%23value%2Bfunded+%2F+%23value%2Brequested+%2A+100+%7D%7D&add-header04=Percent+Funded&tagger-match-all=on&tagger-01-header=aid&tagger-01-tag=%23meta%2Bid&tagger-02-header=amount_funded&tagger-02-tag=%23value%2Bfunded&tagger-03-header=amount_requested&tagger-03-tag=%23value%2Brequested&tagger-05-header=atype_display&tagger-05-tag=%23meta%2Bappeal%2Btype&tagger-06-header=code&tagger-06-tag=%23meta%2Bappeal%2Bid&tagger-11-header=country.iso&tagger-11-tag=%23country%2Bcode%2Bv_iso2&tagger-12-header=country.iso3&tagger-12-tag=%23country%2Bcode%2Bv_iso3&tagger-13-header=country.name&tagger-13-tag=%23country%2Bname&tagger-17-header=country.society_name&tagger-17-tag=%23org%2Bnational_society&tagger-19-header=dtype.id&tagger-19-tag=%23cause%2Bid&tagger-20-header=dtype.name&tagger-20-tag=%23cause%2Bname&tagger-22-header=end_date&tagger-22-tag=%23date%2Bend&tagger-26-header=name&tagger-26-tag=%23crisis%2Bname&tagger-28-header=num_beneficiaries&tagger-28-tag=%23beneficiaries%2Bnum&tagger-29-header=region.id&tagger-29-tag=%23region%2Bid&tagger-31-header=region.region_name&tagger-31-tag=%23region%2Bname&tagger-33-header=sector&tagger-33-tag=%23region%2Bname%2Boffice&tagger-34-header=start_date&tagger-34-tag=%23date%2Bstart&tagger-35-header=status&tagger-35-tag=%23status&header-row=1&url=https%3A%2F%2Fgoadmin.ifrc.org%2Fapi%2Fv2%2Fappeal%2F%3Fformat%3Dcsv%26status%3D0%26limit%3D10000",
+			"columns":[
+				{
+					"hxltag":"#region+name"
+				},
+				{
+					"hxltag":"#meta+count",
+					"align":"right"
+				},
+				{
+					"hxltag":"#beneficiaries+num",
+					"format":{"pre":"","post":"","commas":true},
+					"align":"right"
+				},
+				{
+					"hxltag":"#value+requested",
+					"format":{"pre":"","post":" CHF","commas":true,"roundsf":3},
+					"align":"right"
+				},
+				{
+					"hxltag":"#value+fundeded+pct",
+					"format":{"pre":"","post":"%","commas":false,"roundsf":2},
+					"bar":[true,{"min":0,"max":100,"color":"#ff0000"}],
+					"align":"right"
+				}
+			]
+		},
+		{
+			"src":"https://proxy.hxlstandard.org/data.json?dest=data_edit&filter01=cut&filter-label01=Cut+columns+without+HXL+tags&cut-skip-untagged01=on&filter02=select&filter-label02=Filter+for+just+appeals&select-query02-01=%23meta%2Bappeal%2Btype+%3D+Emergency+Appeal&filter03=add&filter-label03=Calculate+percent+funded&add-tag03=%23value%2Bfunded%2Bpct&add-value03=%7B%7B+%23value%2Bfunded+%2F+%23value%2Brequested+%2A100%7D%7D&add-header03=Percent+Funded&filter04=clean&clean-date-tags04=%23date&filter05=sort&sort-tags05=%23value%2Brequested&sort-reverse05=on&tagger-match-all=on&tagger-01-header=aid&tagger-01-tag=%23meta%2Bid&tagger-02-header=amount_funded&tagger-02-tag=%23value%2Bfunded&tagger-03-header=amount_requested&tagger-03-tag=%23value%2Brequested&tagger-05-header=atype_display&tagger-05-tag=%23meta%2Bappeal%2Btype&tagger-06-header=code&tagger-06-tag=%23meta%2Bappeal%2Bid&tagger-11-header=country.iso&tagger-11-tag=%23country%2Bcode%2Bv_iso2&tagger-12-header=country.iso3&tagger-12-tag=%23country%2Bcode%2Bv_iso3&tagger-13-header=country.name&tagger-13-tag=%23country%2Bname&tagger-17-header=country.society_name&tagger-17-tag=%23org%2Bnational_society&tagger-19-header=dtype.id&tagger-19-tag=%23cause%2Bid&tagger-20-header=dtype.name&tagger-20-tag=%23cause%2Bname&tagger-22-header=end_date&tagger-22-tag=%23date%2Bend&tagger-26-header=name&tagger-26-tag=%23crisis%2Bname&tagger-28-header=num_beneficiaries&tagger-28-tag=%23beneficiaries%2Bnum&tagger-29-header=region.id&tagger-29-tag=%23region%2Bid&tagger-31-header=region.region_name&tagger-31-tag=%23region%2Bname&tagger-33-header=sector&tagger-33-tag=%23region%2Bname%2Boffice&tagger-34-header=start_date&tagger-34-tag=%23date%2Bstart&tagger-35-header=status&tagger-35-tag=%23status&header-row=1&url=https%3A%2F%2Fgoadmin.ifrc.org%2Fapi%2Fv2%2Fappeal%2F%3Fformat%3Dcsv%26status%3D0%26limit%3D10000",
+			"include": [0,5],
+			"columns":[
+				{
+					"hxltag":"#crisis+name",
+					"colspan":4,
+					"header":"Crisis"
+				},
+				{
+					"hxltag":"#country+name",
+					"colspan":2,
+					"header":"Country"
+				},
+				{
+					"hxltag":"#beneficiaries+num",
+					"align":"right",
+					"header":"Beneficiaries",
+					"format":{"pre":"","post":"","commas":true}
+				},
+				{
+					"hxltag":"#date+start",
+					"align":"right",
+					"header":"Start Date"
+				},
+				{
+					"hxltag":"#value+requested",
+					"align":"right",
+					"header":"Funding<br />Requested",
+					"format":{"pre":"","post":" CHF","commas":true,"roundsf":3},
+					"colspan":2
+				},
+				{
+					"hxltag":"#value+funded",
+					"align":"right",
+					"header":"Funding<br />Recieved",
+					"format":{"pre":"","post":" CHF","commas":true,"roundsf":3},
+					"colspan":2
+				},
+				{
+					"hxltag":"#value+funded+pct",
+					"align":"right",
+					"format":{"pre":"","post":"%","commas":false,"roundsf":2},
+					"bar":[true,{"min":0,"max":100,"color":"#ff0000"}],
+					"colspan":2
+				}
+			]
+		},
+		{
+			"src":"https://proxy.hxlstandard.org/data.json?dest=data_edit&filter01=cut&filter-label01=Cut+columns+without+HXL+tags&cut-skip-untagged01=on&filter02=select&filter-label02=Filter+for+just+appeals&select-query02-01=%23meta%2Bappeal%2Btype+%3D+Emergency+Appeal&filter03=add&filter-label03=Calculate+percent+funded&add-tag03=%23value%2Bfunded%2Bpct&add-value03=%7B%7B+%23value%2Bfunded+%2F+%23value%2Brequested+%2A100%7D%7D&add-header03=Percent+Funded&filter04=clean&clean-date-tags04=%23date&filter05=sort&sort-tags05=%23date%2Brequested&sort-reverse05=on&tagger-match-all=on&tagger-01-header=aid&tagger-01-tag=%23meta%2Bid&tagger-02-header=amount_funded&tagger-02-tag=%23value%2Bfunded&tagger-03-header=amount_requested&tagger-03-tag=%23value%2Brequested&tagger-05-header=atype_display&tagger-05-tag=%23meta%2Bappeal%2Btype&tagger-06-header=code&tagger-06-tag=%23meta%2Bappeal%2Bid&tagger-11-header=country.iso&tagger-11-tag=%23country%2Bcode%2Bv_iso2&tagger-12-header=country.iso3&tagger-12-tag=%23country%2Bcode%2Bv_iso3&tagger-13-header=country.name&tagger-13-tag=%23country%2Bname&tagger-17-header=country.society_name&tagger-17-tag=%23org%2Bnational_society&tagger-19-header=dtype.id&tagger-19-tag=%23cause%2Bid&tagger-20-header=dtype.name&tagger-20-tag=%23cause%2Bname&tagger-22-header=end_date&tagger-22-tag=%23date%2Bend&tagger-26-header=name&tagger-26-tag=%23crisis%2Bname&tagger-28-header=num_beneficiaries&tagger-28-tag=%23beneficiaries%2Bnum&tagger-29-header=region.id&tagger-29-tag=%23region%2Bid&tagger-31-header=region.region_name&tagger-31-tag=%23region%2Bname&tagger-33-header=sector&tagger-33-tag=%23region%2Bname%2Boffice&tagger-34-header=start_date&tagger-34-tag=%23date%2Bstart&tagger-35-header=status&tagger-35-tag=%23status&header-row=1&url=https%3A%2F%2Fgoadmin.ifrc.org%2Fapi%2Fv2%2Fappeal%2F%3Fformat%3Dcsv%26status%3D0%26limit%3D10000",
+			"include": [0,5],
+			"columns":[
+				{
+					"hxltag":"#crisis+name",
+					"colspan":4,
+					"header":"Crisis"
+				},
+				{
+					"hxltag":"#country+name",
+					"colspan":2,
+					"header":"Country"
+				},
+				{
+					"hxltag":"#beneficiaries+num",
+					"align":"right",
+					"header":"Beneficiaries",
+					"format":{"pre":"","post":"","commas":true}
+				},
+				{
+					"hxltag":"#date+start",
+					"align":"right",
+					"header":"Start Date"
+				},
+				{
+					"hxltag":"#value+requested",
+					"align":"right",
+					"header":"Funding<br />Requested",
+					"format":{"pre":"","post":" CHF","commas":true,"roundsf":3},
+					"colspan":2
+				},
+				{
+					"hxltag":"#value+funded",
+					"align":"right",
+					"header":"Funding<br />Recieved",
+					"format":{"pre":"","post":" CHF","commas":true,"roundsf":3},
+					"colspan":2
+				},
+				{
+					"hxltag":"#value+funded+pct",
+					"align":"right",
+					"format":{"pre":"","post":"%","commas":false,"roundsf":2},
+					"bar":[true,{"min":0,"max":100,"color":"#ff0000"}],
+					"colspan":2
+				}
+			]
+		},
+		{
+			"src":"https://proxy.hxlstandard.org/data.json?dest=data_edit&filter01=cut&cut-skip-untagged01=on&filter02=count&filter-label02=Create+summary+by+disaster+type&count-tags02=%23cause%2Bname&count-type02-01=count&count-header02-01=Count&count-column02-01=%23meta%2Bcount&count-type02-02=sum&count-pattern02-02=%23value%2Brequested%09&count-header02-02=Funds+requested&count-column02-02=%23value%2Brequested%09&count-type02-03=sum&count-pattern02-03=%23value%2Bfunded&count-header02-03=Funding+recieved&count-column02-03=%23value%2Bfunded&count-type02-04=sum&count-pattern02-04=%23beneficiaries%2Bnum%09&count-header02-04=Beneficiaries&count-column02-04=%23beneficiaries%2Bnum%09&filter03=sort&filter-label03=Sort+by+beneficiaries&sort-tags03=%23beneficiaries%2Bnum&sort-reverse03=on&filter04=add&filter-label04=Calculate+percent+funded&add-tag04=%23value%2Bfunded%2Bpct&add-value04=%7B%7B+%28%23value%2Bfunded+%2F+%23value%2Brequested+%29+%2A+100+%7D%7D&add-header04=Percent+funded&tagger-match-all=on&tagger-01-header=aid&tagger-01-tag=%23meta%2Bid&tagger-02-header=amount_funded&tagger-02-tag=%23value%2Bfunded&tagger-03-header=amount_requested&tagger-03-tag=%23value%2Brequested&tagger-05-header=atype_display&tagger-05-tag=%23meta%2Bappeal%2Btype&tagger-06-header=code&tagger-06-tag=%23meta%2Bappeal%2Bid&tagger-11-header=country.iso&tagger-11-tag=%23country%2Bcode%2Bv_iso2&tagger-12-header=country.iso3&tagger-12-tag=%23country%2Bcode%2Bv_iso3&tagger-13-header=country.name&tagger-13-tag=%23country%2Bname&tagger-17-header=country.society_name&tagger-17-tag=%23org%2Bnational_society&tagger-19-header=dtype.id&tagger-19-tag=%23cause%2Bid&tagger-20-header=dtype.name&tagger-20-tag=%23cause%2Bname&tagger-22-header=end_date&tagger-22-tag=%23date%2Bend&tagger-26-header=name&tagger-26-tag=%23crisis%2Bname&tagger-28-header=num_beneficiaries&tagger-28-tag=%23beneficiaries%2Bnum&tagger-29-header=region.id&tagger-29-tag=%23region%2Bid&tagger-31-header=region.region_name&tagger-31-tag=%23region%2Bname&tagger-33-header=sector&tagger-33-tag=%23region%2Bname%2Boffice&tagger-34-header=start_date&tagger-34-tag=%23date%2Bstart&tagger-35-header=status&tagger-35-tag=%23status&header-row=1&url=https%3A%2F%2Fgoadmin.ifrc.org%2Fapi%2Fv2%2Fappeal%2F%3Fformat%3Dcsv%26limit%3D10000%26status%3D0",
+			"columns":[
+				{
+					"hxltag":"#cause+name",
+					"header":"Crisis"
+				},
+				{
+					"hxltag":"#meta+count",
+					"header":"Count"
+				},
+				{
+					"hxltag":"#beneficiaries+num",
+					"align":"right",
+					"header":"Beneficiaries",
+					"format":{"pre":"","post":"","commas":true}
+				},
+				{
+					"hxltag":"#value+requested",
+					"align":"right",
+					"header":"Funding<br />Requested",
+					"format":{"pre":"","post":" CHF","commas":true,"roundsf":3},
+					"colspan":2
+				},
+				{
+					"hxltag":"#value+funded",
+					"align":"right",
+					"header":"Funding<br />Recieved",
+					"format":{"pre":"","post":" CHF","commas":true,"roundsf":3},
+					"colspan":2
+				},
+				{
+					"hxltag":"#value+funded+pct",
+					"align":"right",
+					"format":{"pre":"","post":"%","commas":false,"roundsf":2},
+					"bar":[true,{"min":0,"max":100,"color":"#ff0000"}],
+					"colspan":2
+				}
+			]
+		}
+	]
+}
