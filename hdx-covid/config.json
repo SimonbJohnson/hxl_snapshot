@@ -11,7 +11,6 @@
 			}
 		]
 	},
-	"color":"#ff0000",
 	"tables":[
 		{
 			"src":"https://proxy.hxlstandard.org/data.json?dest=data_edit&filter01=select&select-query01-01=%23meta%2Bishrp%3DY&filter02=sort&sort-tags02=%23affected%2Binfected%2Bavg%2Bper100000&sort-reverse02=on&filter03=clean&clean-num-tags03=%23affected%2Binfected%2Bavg%2Bper100000&clean-number-format03=0.1f&url=https%3A%2F%2Fraw.githubusercontent.com%2FOCHA-DAP%2Fhdx-scraper-covid-viz%2Fmaster%2Fout_daily.json",
