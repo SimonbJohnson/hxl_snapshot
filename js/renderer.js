@@ -7,7 +7,6 @@ function loadConfig(){
 	    url: 'config.json', 
 	    dataType: 'json',
 	    success:function(response){
-	    	console.log(response);
 	        loadData(response)
 	    },
 	    error:function(){
@@ -35,9 +34,10 @@ function loadSingleData(urls,config){
 	    success:function(response){
 	    	response = reorderAttributes(response);
 	        config = addDataToTable(config,response,url);
-	        loadSingleData(urls,config);
 	        if(urls.length==0){
 	        	loadTemplate(config)
+	        } else {
+	        	loadSingleData(urls,config);
 	        }
 	    }
 	});
@@ -145,7 +145,6 @@ function addTables(html,config){
 }
 
 function createTable(tableConfig){
-
 	let columnPositions = getColumnPositions(tableConfig);
 
 	let html = '<table class="table" style="width: {{ width }}%"><thead>{{ header }}</thead><tbody<{{ values }}</tbody></table>';
@@ -194,9 +193,6 @@ function addBar(value,column,i){
 	let greenBarHTML = '<div class="bar bar_{{ i }}" style="width: {{ length }}px; background-color:{{ color }}!important;"></div>'.replace('{{ length }}',length).replace('{{ i }}',i).replace('{{ color }}',color);
 	let greyBarHTML = '<div class="bar bar_{{ i }} greybar" style="width: {{ length }}px"></div>'.replace('{{ length }}',(width-length)).replace('{{ i }}',i);
 	let barHTML = greyBarHTML + greenBarHTML;
-	//if(column.bar[1].color!=undefined){
-	//	document.getElementsByTagName('style')[0].innerHTML='@media print {.bar {background-color:{{ color }};}}'.replace('{{ color }}',column.bar[1].color);
-	//}
 	return barHTML;
 }
 
