@@ -33,22 +33,27 @@ There are then additional custom tags you can use to create your dynamic report.
 {{ table_n }} - This inserts a table as defined in your config.json. You can have as many tables as you want by incrementing n e.g. {{ table_1 }}, {{ table_2 }}
 
 {{ year }} - inserts current year
+
 {{ month }} -  inserts current month
+
 {{ day }} -  inserts current day in local language
+
 {{ time }} - inserts current timestamp
 
 ### Creating your config.json
 
 Before starting it is worth reviewing the config.json from the demos.
 
-####Branding
+**branding**
 Defines the image branding for the documents
 
 Images: contains list of image each with the following attributes
-- src: src for the image, usually contained in the asset files
-- height: the height of the image
+| Attribute | Description |
+| ----------- | ----------- |
+| src | src for the image, usually contained in the asset files |
+| height | the height of the image |
 
-####Tables
+**tables**
 List of table definitions
 
 - src: HXL proxy JSON list output
