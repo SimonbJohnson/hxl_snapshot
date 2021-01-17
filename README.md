@@ -75,7 +75,7 @@ Defines the image branding for the documents. This is a list of images with sour
 | include | A list with the start and end row for the table. The first row of data is row 0 | list[integer,integer] | Optional (default: include all rows) |
 | width | Width of table in percent | integer | Optional (default: 100) |
 
-**columns***
+**columns**
 | Attribute | Description | Type/Values | Optional |
 | --------- | ----------- | -----| -------- |
 | hxltag | HXL tag to match for this column. Currently it uses exact matching e.g. #org != #org + implementing. If multiple matches are found then multiple columns are created | string ||
@@ -83,4 +83,19 @@ Defines the image branding for the documents. This is a list of images with sour
 | align | Choose to align column to the left or right | 'left','right' | Optional (default: left |
 | bar | Settings for including a bar with length based on the value of the column | list | Optional (default: no bar ) |
 | arrow | Settings for including an arrow with direction based on the value of the column | list | Optional (default: no bar ) |
-| format | An object with options to format a columns value | object | |
+| format | An object with options to format a columns value | object | Optional (default: No formatting |
+
+**bar**
+| Position | Description | Type/Values | Optional |
+| --------- | ----------- | -----| -------- |
+| 0 | Boolean values on whether to include a bar | true, false | |
+| 1 | An object stating the minimum and maximum values to cap at | {min:number,max:number,color:#hexcode} | Optional (default: min and max for the column(s), color = #1ebfb3 |
+
+**arrow**
+
+An arrow that rotates from -45 degrees downards to 45 degrees upwards based on the min/max value
+
+| Position | Description | Type/Values | Optional |
+| --------- | ----------- | -----| -------- |
+| 0 | Boolean values on whether to include a bar | true, false | |
+| 1 | An object stating the minimum and maximum values to cap at | {min:number,max:number} | Optional (default: min and max for the column(s) |
