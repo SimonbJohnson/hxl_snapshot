@@ -45,9 +45,15 @@ There are then additional custom tags you can use to create your dynamic report.
 Before starting it is worth reviewing the config.json from the demos.
 
 **branding**
-Defines the image branding for the documents
+Defines the image branding for the documents. This is a list of images with source and height attributes that can be placed into the document.  They are presented as a horizontal row
 
-Images: contains list of image each with the following attributes
+| Attribute | Description |
+| ----------- | ----------- |
+| images | contains list of image objects |
+
+
+Image objects
+
 | Attribute | Description |
 | ----------- | ----------- |
 | src | src for the image, usually contained in the asset files |
