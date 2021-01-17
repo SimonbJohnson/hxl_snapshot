@@ -47,24 +47,24 @@ Before starting it is worth reviewing the config.json from the demos.
 ** Config file **
 Defines the image branding for the documents. This is a list of images with source and height attributes that can be placed into the document.  They are presented as a horizontal row
 
-| Attribute | Description |
-| ----------- | ----------- |
-| branding | where the document branding sits |
-| tables | A list of table definitions |
+| Attribute | Description | Type |
+| ----------| ----------- | -----|
+| branding | where the document branding sits | Object |
+| tables | A list of table definitions | List |
 
 **brandings**
 
-| Attribute | Description |
-| ----------- | ----------- |
-| images | contains list of image objects |
+| Attribute | Description | Type |
+| --------- | ----------- | -----|
+| images | contains list of image objects | List |
 
 
 **images**
 
-| Attribute | Description |
-| ----------- | ----------- |
-| src | src for the image, usually contained in the asset files |
-| height | the height of the image |
+| Attribute | Description | Type |
+| --------- | ----------- | -----|
+| src | src for the image, usually contained in the asset files | string |
+| height | the height of the image | integer |
 
 **tables**
 List of table definitions
