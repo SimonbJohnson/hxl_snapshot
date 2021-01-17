@@ -68,6 +68,8 @@ Defines the image branding for the documents. This is a list of images with sour
 
 **tables**
 
+Definitions of tables to be called in template using {{ table_n }}.  {{ table_1 }} refers to first definition in this list.
+
 | Attribute | Description | Type/Values | Optional |
 | --------- | ----------- | -----| -------- |
 | src | A link to a hxl Proxy source URL. It must be in JSON list format including headers | string | |
