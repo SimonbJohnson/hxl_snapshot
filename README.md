@@ -1,4 +1,4 @@
-# hxl_tables
+# HXL Snapshot
 
 Quickly table for reports from HXL sources suitable for conversion to PDFs
 
@@ -44,15 +44,22 @@ There are then additional custom tags you can use to create your dynamic report.
 
 Before starting it is worth reviewing the config.json from the demos.
 
-**branding**
+** Config file **
 Defines the image branding for the documents. This is a list of images with source and height attributes that can be placed into the document.  They are presented as a horizontal row
+
+| Attribute | Description |
+| ----------- | ----------- |
+| branding | where the document branding sits |
+| tables | A list of table definitions |
+
+**brandings**
 
 | Attribute | Description |
 | ----------- | ----------- |
 | images | contains list of image objects |
 
 
-Image objects
+**images**
 
 | Attribute | Description |
 | ----------- | ----------- |
