@@ -44,29 +44,33 @@ There are then additional custom tags you can use to create your dynamic report.
 
 Before starting it is worth reviewing the config.json from the demos.
 
-** Config file **
+**Config file**
 Defines the image branding for the documents. This is a list of images with source and height attributes that can be placed into the document.  They are presented as a horizontal row
 
-| Attribute | Description | Type |
-| ----------| ----------- | -----|
-| branding | where the document branding sits | Object |
-| tables | A list of table definitions | List |
+| Attribute | Description | Type | Optional |
+| ----------| ----------- | -----| -------- |
+| branding | where the document branding sits | object |  |
+| tables | A list of table definitions | list |  |
 
 **brandings**
 
-| Attribute | Description | Type |
-| --------- | ----------- | -----|
-| images | contains list of image objects | List |
+| Attribute | Description | Type | Optional |
+| --------- | ----------- | -----| -------- |
+| images | contains list of image objects | list |  |
 
 
 **images**
 
-| Attribute | Description | Type |
-| --------- | ----------- | -----|
-| src | src for the image, usually contained in the asset files | string |
-| height | the height of the image | integer |
+| Attribute | Description | Type | Optional |
+| --------- | ----------- | -----| -------- |
+| src | src for the image, usually contained in the asset files | string | |
+| height | the height of the image | integer | |
 
 **tables**
-List of table definitions
 
-- src: HXL proxy JSON list output
+| Attribute | Description | Type | Optional |
+| --------- | ----------- | -----| -------- |
+| src | A link to a hxl Proxy source URL. It must be in JSON list format including headers | string | |
+| columns | A list of column definition for the table | list | |
+| include | A list with the start and end row for the table. The first row of data is row 0 | list[integer,integer] | Optional (default: include all rows) |
+| width | Width of table in percent | integer | Optional (default: 100) |
