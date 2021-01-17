@@ -338,7 +338,9 @@ function formatValue(value,format){
 
 		/* numerical formatting */
 		if(format.roundsf != undefined){
-			formattedValue = parseFloat(formattedValue.toPrecision(format.roundsf));
+			if(!isNaN(Number(formattedValue))){
+				formattedValue = parseFloat(formattedValue.toPrecision(format.roundsf));
+			}
 		}
 
 		/* string formatting */
