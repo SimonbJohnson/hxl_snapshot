@@ -99,3 +99,15 @@ An arrow that rotates from -45 degrees downards to 45 degrees upwards based on t
 | --------- | ----------- | -----| -------- |
 | 0 | Boolean values on whether to include a bar | true, false | |
 | 1 | An object stating the minimum and maximum values to cap at | {min:number,max:number} | Optional (default: min and max for the column(s) |
+
+**formatting**
+
+Options format the value for display
+
+| Attribute | Description | Type/Values | Optional |
+| --------- | ----------- | ----------- | -------- |
+| pre | Text to display before the value | string | Optional |
+| post | Text to display after the value | string | Optional |
+| commas | Whether to insert commas per 1000s into numbers | true, false | Optional (default: false) |
+| roundsf | How many significant figures to round to | integer | Optional |
+
