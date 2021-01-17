@@ -47,30 +47,40 @@ Before starting it is worth reviewing the config.json from the demos.
 **Config file**
 Defines the image branding for the documents. This is a list of images with source and height attributes that can be placed into the document.  They are presented as a horizontal row
 
-| Attribute | Description | Type | Optional |
+| Attribute | Description | Type/Values | Optional |
 | ----------| ----------- | -----| -------- |
 | branding | where the document branding sits | object |  |
 | tables | A list of table definitions | list |  |
 
 **brandings**
 
-| Attribute | Description | Type | Optional |
+| Attribute | Description | Type/Values | Optional |
 | --------- | ----------- | -----| -------- |
 | images | contains list of image objects | list |  |
 
 
 **images**
 
-| Attribute | Description | Type | Optional |
+| Attribute | Description | Type/Values | Optional |
 | --------- | ----------- | -----| -------- |
 | src | src for the image, usually contained in the asset files | string | |
 | height | the height of the image | integer | |
 
 **tables**
 
-| Attribute | Description | Type | Optional |
+| Attribute | Description | Type/Values | Optional |
 | --------- | ----------- | -----| -------- |
 | src | A link to a hxl Proxy source URL. It must be in JSON list format including headers | string | |
 | columns | A list of column definition for the table | list | |
 | include | A list with the start and end row for the table. The first row of data is row 0 | list[integer,integer] | Optional (default: include all rows) |
 | width | Width of table in percent | integer | Optional (default: 100) |
+
+**columns***
+| Attribute | Description | Type/Values | Optional |
+| --------- | ----------- | -----| -------- |
+| hxltag | HXL tag to match for this column. Currently it uses exact matching e.g. #org != #org + implementing. If multiple matches are found then multiple columns are created | string ||
+| header | Text to be displayed as header for column | string | Optional (default: header used in source file |
+| align | Choose to align column to the left or right | 'left','right' | Optional (default: left |
+| bar | Settings for including a bar with length based on the value of the column | list | Optional (default: no bar ) |
+| arrow | Settings for including an arrow with direction based on the value of the column | list | Optional (default: no bar ) |
+| format | An object with options to format a columns value | object | |
