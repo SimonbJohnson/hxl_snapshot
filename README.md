@@ -4,9 +4,9 @@ Quickly table for reports from HXL sources suitable for conversion to PDFs
 
 ## Demo outputs
 
-- HDX Covid-19 report
-- IFRC appeals summary
-- UN stand By Partnerships deployment overview
+- [HDX Covid-19 report](https://tools.humdata.org/snap?output=pdf&pdfFormat=A4&pdfLandscape=true&pdfMarginTop=35&pdfMarginLeft=20&pdfMarginRight=20&url=https://simonbjohnson.github.io/hxl_snapshot/snapshots/hdx-covid/)
+- [IFRC appeals summary](https://tools.humdata.org/snap?output=pdf&pdfFormat=A4&pdfLandscape=true&pdfMarginTop=35&pdfMarginLeft=20&pdfMarginRight=20&url=https://simonbjohnson.github.io/hxl_snapshot/snapshots/ifrc-active-appeals-drefs/)
+- [UN stand By Partnerships deployment overview]()
 
 ## Getting started
 
