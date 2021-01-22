@@ -85,7 +85,8 @@ Definitions of tables to be called in template using {{ table_n }}.  {{ table_1 
 | align | Choose to align column to the left or right | 'left','right' | Optional (default: left |
 | bar | Settings for including a bar with length based on the value of the column | list | Optional (default: no bar ) |
 | arrow | Settings for including an arrow with direction based on the value of the column | list | Optional (default: no bar ) |
-| format | An object with options to format a columns value | object | Optional (default: No formatting |
+| format | An object with options to format a column's value | object | Optional (default: No formatting ) |
+| colspan | Set the width of the column | integer |  Optional (default: 1 ) |
 
 **bar**
 | Position | Description | Type/Values | Optional |
