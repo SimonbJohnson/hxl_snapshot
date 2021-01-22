@@ -1,0 +1,21 @@
+{
+	"branding":{
+		"images":[
+			{
+				"src":"assets/branding_example.png",
+				"height":40
+			}
+		]
+	},
+	"tables":[
+		{
+			"src":"insert a hxl proxy link as json list output: https://proxy.hxlstandard.org/data/source",
+			"columns":[
+				{
+					"header":"Insert Column definitions here",
+					"hxltag":"#meta"
+				}
+			]
+		}
+	]
+}
