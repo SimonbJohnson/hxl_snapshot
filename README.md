@@ -40,6 +40,8 @@ There are then additional custom tags you can use to create your dynamic report.
 
 {{ time }} - inserts current timestamp
 
+{{ page breaks }} - inserts page break in PDF snap tool
+
 ### Creating your config.json
 
 Before starting it is worth reviewing the config.json from the demos.
