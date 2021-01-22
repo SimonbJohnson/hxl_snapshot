@@ -1,3 +1,7 @@
 # COVID-19 confirmed, recovered and death cases in Indonesia: On-Demand Snapshot, {{ day }} {{ month }} {{ year }} [{{ time }} UTC]
 
 {{ table_1 }}
+
+{{ page break }}
+
+{{ table_2 }}
