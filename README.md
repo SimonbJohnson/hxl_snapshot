@@ -1,6 +1,6 @@
 # HXL Snapshot
 
-Quickly table for reports from HXL sources suitable for conversion to PDFs
+Quickly create PDFs report dynamically updated from a HXL data source
 
 ## Demo outputs
 
