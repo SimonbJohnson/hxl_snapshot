@@ -244,8 +244,8 @@ function setMinMax(tableConfig,columnPositions){
 		let columnsPositionSub = columnPositions[j];
 		tableConfig.data.forEach(function(row,k){
 			if(k<2){
-				column.min = tableConfig.data[2][columnsPositionSub[0]]
-				column.max = tableConfig.data[2][columnsPositionSub[0]]
+				column.min = tableConfig.data[2][columnsPositionSub[0]]*1
+				column.max = tableConfig.data[2][columnsPositionSub[0]]*1
 			} else {
 				columnsPositionSub.forEach(function(colPos){
 					let value =row[colPos]*1
