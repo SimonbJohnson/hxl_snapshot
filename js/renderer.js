@@ -215,7 +215,7 @@ function addArrow(value,column,i){
 		rotate = 45
 	}
 
-	let arrowHTML = ('<img class="arrow arrow_'+i+'" class="arrow" src="../images/arrow.svg" style="transform: rotate({{ rotate }}deg)">').replace("{{ rotate }}",rotate);
+	let arrowHTML = ('<img class="arrow arrow_'+i+'" class="arrow" src="../../images/arrow.svg" style="transform: rotate({{ rotate }}deg)">').replace("{{ rotate }}",rotate);
 	return arrowHTML;
 }
 
