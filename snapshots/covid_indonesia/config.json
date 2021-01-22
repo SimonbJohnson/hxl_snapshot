@@ -1,0 +1,31 @@
+{
+	"branding":{
+		"images":[
+		]
+	},
+	"tables":[
+		{
+			"src":"https://proxy.hxlstandard.org/data.json?dest=data_edit&filter01=explode&filter-label01=Pivot+admin+columns+to+values+in+single+column&explode-header-att01=header&explode-value-att01=value&filter02=rename&filter-label02=Rename+column+header&rename-oldtag02=%23affected%2Bactive_cases%2Bheader&rename-newtag02=%23adm1%2Bname&rename-header02=admin1&filter03=rename&filter-label03=Rename+column+header&rename-oldtag03=%23affected%2Bactive_cases%2Bvalue&rename-newtag03=%23affected%2Bactive_cases&rename-header03=Active+cases&filter04=select&filter-label04=Filter+data+to+latest+date+only&select-query04-01=%23date+is+max&filter05=rename&rename-oldtag05=%23affected%2Bactive_cases&rename-newtag05=%23affected%2Bactive_cases%2Bcurrent_day&filter06=merge&filter-label06=Merge+column+of+dataset+filter+to+previous+day&merge-url06=https%3A%2F%2Fproxy.hxlstandard.org%2Fdata.csv%3Fdest%3Ddata_edit%26filter01%3Dexplode%26filter-label01%3DPivot%2Badmin%2Bcolumns%2Bto%2Bvalues%2Bin%2Bsingle%2Bcolumn%26explode-header-att01%3Dheader%26explode-value-att01%3Dvalue%26filter02%3Drename%26filter-label02%3DRename%2Bcolumn%2Bheader%26rename-oldtag02%3D%2523affected%252Bactive_cases%252Bheader%26rename-newtag02%3D%2523adm1%252Bname%26rename-header02%3Dadmin1%26filter03%3Drename%26filter-label03%3DRename%2Bcolumn%2Bheader%26rename-oldtag03%3D%2523affected%252Bactive_cases%252Bvalue%26rename-newtag03%3D%2523affected%252Bactive_cases%26rename-header03%3DActive%2Bcases%26filter04%3Dselect%26filter-label04%3DFilter%2Bdata%2Bto%2Blatest%2Bdate%2Bonly%26select-query04-01%3D%2523date%2Bis%2Bmax%26select-reverse04%3Don%26filter05%3Dselect%26select-query05-01%3D%2523date%2Bis%2Bmax%26filter06%3Drename%26rename-oldtag06%3D%2523affected%252Bactive_cases%26rename-newtag06%3D%2523affected%252Bactive_cases%252Bprevious_day%26rename-header06%3DPrevious%2BDays%2Bcases%26tagger-match-all%3Don%26tagger-default-tag%3D%2523affected%252Bactive_cases%252Blabel%26tagger-01-header%3Dkasus%2Baktif%26tagger-01-tag%3D%2523date%26header-row%3D1%26url%3Dhttps%253A%252F%252Fdrive.google.com%252Fu%252F2%252Fuc%253Fid%253D11wED0XH5p8OwU36qd92PqfBVacpi-EEW%2526export%253Ddownload%26sheet%3D2&merge-keys06=%23adm1%2Bname&merge-tags06=%23affected&filter07=add&filter-label07=Add+a+column+of+the+difference+between+the+two+dates+as+a+percent+of+the+previous+days+figure&add-tag07=%23affected%2Bchange&add-value07=%7B%7B%28%23affected%2Bactive_cases%2Bcurrent_day+-+%23affected%2Bactive_cases%2Bprevious_day%29%2F%28%23affected%2Bactive_cases%2Bprevious_day%29%2A100%7D%7D&add-header07=Change&filter08=clean&clean-num-tags08=%23affected%2Bchange&clean-number-format08=0.1f&tagger-match-all=on&tagger-default-tag=%23affected%2Bactive_cases%2Blabel&tagger-01-header=kasus+aktif&tagger-01-tag=%23date&header-row=1&url=https%3A%2F%2Fdrive.google.com%2Fu%2F2%2Fuc%3Fid%3D11wED0XH5p8OwU36qd92PqfBVacpi-EEW%26export%3Ddownload&sheet=2",
+			"columns":[
+				{
+					"hxltag":"#adm1+name"
+				},
+				{
+					"hxltag":"#affected+active_cases+current_day",
+					"bar":[true,{"color":"#3399FF"}],
+					"align":"right"
+				},
+				{
+					"hxltag":"#affected+active_cases+previous_day",
+					"align":"right"
+				},
+				{
+					"hxltag":"#affected+change",
+					"align":"right",
+					"arrow":[true,{"min":-5,"max":5}]
+				}
+			],
+			"width":50
+		}
+	]
+}
