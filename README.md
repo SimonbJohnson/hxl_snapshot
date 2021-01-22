@@ -1,6 +1,6 @@
 # HXL Snapshot
 
-Quickly create PDFs report dynamically updated from a HXL data source
+Quickly create PDF reports dynamically updated from a HXL data source
 
 ## Demo outputs
 
