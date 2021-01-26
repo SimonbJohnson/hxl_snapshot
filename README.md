@@ -4,9 +4,10 @@ Quickly create PDF reports dynamically updated from a HXL data source
 
 ## Demo outputs
 
-- [HDX Covid-19 report](https://tools.humdata.org/snap?output=pdf&pdfFormat=A4&pdfLandscape=true&pdfMarginTop=35&pdfMarginLeft=20&pdfMarginRight=20&url=https://simonbjohnson.github.io/hxl_snapshot/snapshots/hdx-covid/)
-- [IFRC appeals summary](https://tools.humdata.org/snap?output=pdf&pdfFormat=A4&pdfLandscape=true&pdfMarginTop=35&pdfMarginLeft=20&pdfMarginRight=20&url=https://simonbjohnson.github.io/hxl_snapshot/snapshots/ifrc-active-appeals-drefs/)
-- [UN stand By Partnerships deployment overview](https://tools.humdata.org/snap?output=pdf&pdfFormat=A4&pdfLandscape=true&pdfMarginTop=35&pdfMarginLeft=20&pdfMarginRight=20&url=https://simonbjohnson.github.io/hxl_snapshot/snapshots/standbypartnership/)
+- [HDX Covid-19 report](https://tools.humdata.org/snap?output=pdf&pdfFormat=A4&pdfLandscape=true&pdfMarginTop=35&pdfMarginLeft=20&pdfMarginRight=20&url=https://data.humdata.org/visualization/hxl-snapshot/snapshots/hdx-covid/)
+- [IFRC appeals summary](https://tools.humdata.org/snap?output=pdf&pdfFormat=A4&pdfLandscape=true&pdfMarginTop=35&pdfMarginLeft=20&pdfMarginRight=20&url=https://data.humdata.org/visualization/hxl-snapshot/snapshots/ifrc-active-appeals-drefs/)
+- [UN stand By Partnerships deployment overview](https://tools.humdata.org/snap?output=pdf&pdfFormat=A4&pdfLandscape=true&pdfMarginTop=35&pdfMarginLeft=20&pdfMarginRight=20&url=https://data.humdata.org/visualization/hxl-snapshot/snapshots/standbypartnership/)
+- [Indonesia Daily Covid-19 cases](https://tools.humdata.org/snap?output=pdf&pdfFormat=A4&pdfLandscape=true&pdfMarginTop=35&pdfMarginLeft=20&pdfMarginRight=20&url=https://data.humdata.org/visualization/hxl-snapshot/snapshots/covid_indonesia/)
 
 ## Getting started
 
